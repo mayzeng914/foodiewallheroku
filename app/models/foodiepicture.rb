@@ -6,6 +6,7 @@ class Foodiepicture
   #field :picture_url, type: String
 
   belongs_to :user
+  has_many :comments
 
   has_mongoid_attached_file :image
   # ,styles: {

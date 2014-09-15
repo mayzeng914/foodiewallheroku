@@ -25,6 +25,7 @@ class User
   has_secure_password
 
   has_many :foodiepictures
+  has_many :comments
 
   has_mongoid_attached_file :image
   validates_attachment_content_type :image, content_type:["image/jpg", "image/jpeg", "image/png", "image/gif"]

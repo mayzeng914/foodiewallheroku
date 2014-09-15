@@ -9,4 +9,17 @@
 		<%= link_to "Delete", :foodiepicture, method: :delete, data: { confirm: "Are you sure you want to delete #{@foodiepicture.description}?"}, class: "btn btn-pink" %>
 	</div>
 
+<ul>
+	<% @foodiepicture.comments.each do |c| %>
+		<li>
+			<%= c.user.name + ": " + c.user.comment %>
+		</li>
+	<% end %>
+</ul>
+
+<form action="/comments/new">
+	<input type="text" placehoder="leave a comment...">
+	<input type="submit">
+</form>
+
 </div>
