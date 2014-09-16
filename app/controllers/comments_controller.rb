@@ -1,10 +1,11 @@
 class CommentsController < ApplicationController
-	def new
-		@foodiepicture.comment = Comment.new		
-	end
+	# def new
+	# 	@foodiepicture.comment = Comment.new		
+	# end
 
 	def create
-		@foodiepicture.comment = current_user.foodiepicture.comments.new(params.require(:comment).permit(:comment))
+		@foodiepicture.comment = Comment.new
+		@foodiepicture.comment = current_user.foodiepicture.comment.new(params.require(:comment).permit(:comment))
 		if @foodiepicture.comment.save
 			render 'foodiepicture/show'
 		end
