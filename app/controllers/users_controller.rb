@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :login
+  before_action :login, :comment_post
   # def index
   # 	@user = User.where(is_active: true)
   # end
@@ -28,6 +28,10 @@ class UsersController < ApplicationController
   def show
   	@user = User.find(params[:id])
     @foodiepictures = @user.foodiepictures
+  end
+
+  def comment_post
+    @comment_post = Comment.new
   end
 
   def edit

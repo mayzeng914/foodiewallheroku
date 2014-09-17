@@ -12,7 +12,7 @@ Foodiewall::Application.routes.draw do
   resources :foodiepictures
   resources :users
   resource  :session, only: [:new, :create, :destroy]
-  resource :comment, only: [:new, :create]
+  resource :comment, only: [:create]
 
   get "users/error" => "users#error"
 
