@@ -1,5 +1,5 @@
 class FoodiepicturesController < ApplicationController
-	before_action :login, :signup
+	before_action :login, :signup, :comment_post
 
 	def index
 		@foodiepictures = Foodiepicture.all
@@ -10,6 +10,7 @@ class FoodiepicturesController < ApplicationController
 	def show
 		if current_user
 		@foodiepicture = Foodiepicture.find(params[:id])
+		@id = params[:id]
 	    else
 	       redirect_to foodiepictures_path
 	    end
@@ -28,7 +29,7 @@ class FoodiepicturesController < ApplicationController
 			redirect_to foodiepictures_path
 			return
 		end
-		foodiepicture = current_user.foodiepictures.new(params.require(:foodiepicture).permit(:image, :description) )
+		foodiepicture = current_user.foodiepictures.new( params.require(:foodiepicture).permit(:image, :description) )
 		if foodiepicture.save
 			redirect_to foodiepictures_path
 		end
@@ -41,6 +42,10 @@ class FoodiepicturesController < ApplicationController
 
   	def signup
   	    @user = User.new
+    end
+
+    def comment_post
+    	@comment_post = Comment.new
     end
 
 	def edit

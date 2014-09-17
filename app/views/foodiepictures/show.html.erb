@@ -9,17 +9,28 @@
 		<%= link_to "Delete", :foodiepicture, method: :delete, data: { confirm: "Are you sure you want to delete #{@foodiepicture.description}?"}, class: "btn btn-pink" %>
 	</div>
 
-<ul>
+<ul class="commentbox">
 	<% @foodiepicture.comments.each do |c| %>
 		<li>
-			<%= c.user.name + ": " + c.user.comment %>
+			<% if current_user %>
+				<%= c.user.name + ':' + c.comment %>
+			<% end %>
 		</li>
 	<% end %>
 </ul>
 
-<% form_tag comment_path, :method=>'post' %>
-	<%= text_area_tag :comment, "leave a comment..." %>
-	<%= submit_tag "Submit" %>
+<div class="commentcontainer">
+<%= form_for @comment_post, {url: comment_path(foodie_id: @id)} do |n| %>
+    <%= n.text_field :comment, placeholder: "leave a comment..." %>
+    <%= n.submit "Post comment!" %>
+<% end %>
+</div>
+
+<% yield %>
+
+<%# form_tag comment_path, :method=>'post' %>
+	<%#= text_field_tag :comment, "leave a comment..." %>
+	<%#= submit_tag "Submit" %>
 
 <!-- <form action="/comment" method="post">
 	<input type="text" name="comment" placeholder="leave a comment...">
